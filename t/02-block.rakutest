@@ -1,0 +1,35 @@
+#!/usr/bin/env raku
+use Test;
+use HCL::Grammar;
+plan 3;
+
+my $g := HCL::Grammar.new;
+
+ok $g.parse(q:to/HCL/), 'parse block';
+hello "is_it_me" "you-are-looking-for" {
+  i_wonder = "where-you-are"
+  and_i_wonder = "what-you-do"
+}
+HCL
+
+ok $g.parse(q:to/HCL/), 'parse another block';
+when "you_wish" "upon-a-star" {
+  makes = "no.difference"
+  who   = you.are
+  when  = "you-wish-upon"
+  a     = star.your.dreams-come.true
+}
+HCL
+
+ok $g.parse(q:to/HCL/), 'parse another block';
+somewhere "over" {
+  the_rainbow {
+    way = up.high
+  }
+}
+HCL
+
+$g.parse(q:to/HCL/);
+locals {}
+HCL
+

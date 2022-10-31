@@ -1,0 +1,53 @@
+#!/usr/bin/env raku
+use Test;
+use HCL::Grammar;
+
+my $g := HCL::Grammar.new;
+
+ok $g.parse(q:to/HCL/.trim, :rule<expression>), 'string expr';
+"one"
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<variable>), 'variable';
+var.some_sort_of_things
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<expr-term>), 'expr-term';
+var.some_sort_of_things
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<expr-term>), 'expression';
+var.some_sort_of_things
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<expr-term>), 'arguments';
+var.some_sort_of_things
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<function-call>), 'function call';
+toset(var.some_sort_of_things)
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<expr-term>), 'function call';
+toset(var.some_sort_of_things)
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<operation>), 'binary op operation';
+x.a == "b"
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<expression>), 'binary op expression';
+x.a == "b"
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<expression>), 'conditional';
+x.a == "b" ? "one" : "two"
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<operation>), 'conditional';
+a == "b" && false
+HCL
+
+ok $g.parse('x == "y" ? a-bc + 1 : 0', :rule<expression>), 'conditional with identifiers with dashes';
+
+done-testing;

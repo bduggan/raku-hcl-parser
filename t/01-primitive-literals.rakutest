@@ -1,0 +1,77 @@
+#!raku
+
+use HCL::Grammar;
+use Test;
+plan 14;
+
+my $g := HCL::Grammar.new;
+
+ok $g.parse('whole_number = 5'), 'literal, no comments or whitespace';
+
+ok $g.parse(q:to/HCL/), 'primitive literals with comments';
+# Numbers
+whole_number                = 5
+fractional_number           = 3.2
+fractional_number_precision = 3.14159265358979323846264338327950288419716939937510582097494459
+
+# Strings
+string_ascii           = "hello"
+string_unicode_bmp     = "ЖЖ"
+string_unicode_astral  = "👩‍👩‍👧‍👦"
+string_unicode_nonnorm = "años" # This is intentionally a combining tilde followed by n
+
+HCL
+
+ok $g.parse('x = 2 '), 'trailing whitespace';
+
+ok $g.parse(q:to/HCL/.trim, :rule<object>), 'object';
+{
+  a = 2
+}
+HCL
+
+ok $g.parse(q:to/HCL/), 'object assignment';
+x = {
+  a = 2
+}
+HCL
+
+ok $g.parse(q:to/HCL/.trim, :rule<attribute>), 'empty block attr';
+default = {}
+HCL
+
+ok $g.parse(q:to/HCL/), 'attrs';
+default     = {}
+type        = map(string)
+HCL
+
+ok $g.parse(q:to/HCL/), 'empty str';
+a = ""
+HCL
+
+ok $g.parse('x["c"]', :rule<expression>), 'index';
+
+ok $g.parse('x[a.b]["c"]', :rule<expression>), 'index';
+ok $g.parse('a.b.c.d.e', :rule<expression>), 'get-attr';
+ok $g.parse('a[*]', :rule<expression>), 'splat';
+
+$g.parse(q:to/HCL/.trim);
+  abc = merge(
+    {
+      for i in range(blah) :
+      i == 0 ?
+      "x" :
+      "y" => "z"
+    }
+  )
+HCL
+
+ok $g.parse('a.c[i].b', :rule<expression>), 'expr';
+
+ok $g.parse(q:to/HCL/.trim), 'functon call';
+  abdefg = flubber(
+    x == "y" ? "abc" : "def"
+  )
+HCL
+
+

@@ -1,0 +1,16 @@
+#!raku
+
+use HCL::Grammar;
+use Test;
+
+my $g := HCL::Grammar.new;
+
+ok $g.parse('"hi"',:rule<template-expr>), 'quoted literal';
+ok $g.parse('"hello everybody"',:rule<template-expr>), 'simple string';
+
+ok $g.parse(q:to/HCL/.trim), 'template interpolation';
+value = "${replace(blah, "-", "_")}"
+HCL
+
+ok 1, 'hi';
+done-testing;

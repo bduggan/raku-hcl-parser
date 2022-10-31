@@ -1,0 +1,14 @@
+#!/usr/bin/env raku
+
+my %*SUB-MAIN-OPTS = :named-anywhere;
+use HCL::Parser;
+
+unit sub MAIN($file, Bool :$dump);
+
+my $out = parse($file.IO.slurp);
+
+say $out if $dump;
+
+fail "errors parsing $file:\n$out" unless $out;
+
+say $file.IO.basename ~ " : syntax ok";

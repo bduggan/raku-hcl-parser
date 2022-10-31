@@ -1,0 +1,24 @@
+{
+  "auth": "github:bduggan",
+  "authors": [
+    "Brian Duggan"
+  ],
+  "description": "A Parser for Terraform's HCL language",
+  "name": "HCL::Parser",
+  "license": "MIT",
+  "perl": "6.d",
+  "provides": {
+    "HCL::Grammar": "lib/HCL/Grammar.rakumod",
+    "HCL::Parser": "lib/HCL/Parser.rakumod"
+  },
+  "repo-type": "git",
+  "source-url": "https://github.com/bduggan/raku-hcl-parser",
+  "tags": [ ],
+  "depends" : [
+    "Grammar::PrettyErrors"
+  ],
+  "test-depends": [
+    "Test"
+  ],
+  "version": "0.0.1"
+}
