@@ -19,7 +19,7 @@ Example usage:
     $ tf-parse config.tf
     config.tf: syntax ok
 
-`tf-parse` also has a `--dump` option to dump the syntax tree.
+`tf-parse` also has a `--dump` option to dump the parse tree.
 
 ## INSTALLATION
 
@@ -34,4 +34,4 @@ Example usage:
 - if/else in templates
 - inline comments
 - rule for identifiers
-- an action class, to make a data structure, and do something interesting after parsing
+- an action class, to do something interesting after parsing, like generate a syntax tree
