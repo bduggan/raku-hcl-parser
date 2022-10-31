@@ -25,7 +25,7 @@ Example usage:
 
 1. Install raku (see https://rakubrew.org/) and zef, the package manager.
 
-2. zef install https://github.com/bduggan/raku-hcl-parser.git
+2. `zef install https://github.com/bduggan/raku-hcl-parser.git`
 
 ## TODO
 
