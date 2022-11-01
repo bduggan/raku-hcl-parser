@@ -20,12 +20,11 @@ rule config-file {
 
 rule body {
   \s*
-  [
-    | <attribute>
-    | <block>
-    | <one-line-block>
-    | ""
-  ] * %% \n
+  <piece> * %% \n
+}
+
+rule piece {
+  <attribute> | <block> | <one-line-block>
 }
 
 rule one-line-block {
@@ -36,7 +35,7 @@ rule one-line-block {
 }
 
 rule block {
-  <identifier> [ <string> | <identifier> ] *
+  <identifier> [ $<rest> = [ <string> | <identifier> ] ]*
   '{' \n*
     <body>
   '}'

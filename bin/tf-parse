@@ -1,13 +1,18 @@
 #!/usr/bin/env raku
 
 my %*SUB-MAIN-OPTS = :named-anywhere;
+use JSON::Fast;
 use HCL::Parser;
 
-unit sub MAIN($file, Bool :$dump);
+unit sub MAIN($file,
+  Bool :$parse, #= dump the parse tree
+  Bool :$json,  #= dump a data structure created, as json
+);
 
-my $out = parse($file.IO.slurp);
+my $out = parse($file.IO.slurp, :$parse);
 
-say $out if $dump;
+say to-json($out) if $json;
+say $out if $parse;
 
 fail "errors parsing $file:\n$out" unless $out;
 
