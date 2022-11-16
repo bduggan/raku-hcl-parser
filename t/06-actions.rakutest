@@ -1,0 +1,16 @@
+#!raku
+
+use HCL::Grammar;
+use HCL::Actions;
+use Test;
+
+my $actions = HCL::Actions.new;
+my $g := HCL::Grammar.new;
+
+is $g.parse('"hi"', :$actions, :rule<template-expr>).made, 'hi', 'template-expr';
+is $g.parse('"hi"', :$actions, :rule<expr-term>).made, 'hi', 'expression';
+is $g.parse('"hi"', :$actions, :rule<expression>).made, 'hi', 'expression';
+
+my $hello-hi = $g.parse('hello = "hi"', :$actions, :rule<object-elem>).made;
+ok $hello-hi eqv :hello<hi>, 'got object-elem';
+
