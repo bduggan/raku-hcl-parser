@@ -28,7 +28,7 @@ rule piece {
 }
 
 rule one-line-block {
-   '{' <identifier> [ <string> | <identifier> ]* '{' 
+   '{' <identifier> [ <string> | <identifier> ]* '{'
    [ <identifier> '=' <expression> ]?
    '}'
    \n
@@ -51,13 +51,11 @@ token variable {
 }
 
 rule expression {
-  | <operation>
-  | <expr-term>
+  <operation>
 }
 
-
 rule operation {
-  [ <unary-op> ? <expr-term> ] + % <binary-op> [ '?' \n* <expression> ':' \n* <expression> ]?
+  [ [ <unary-op>? <expr-term> ] + % <binary-op> ] [ '?' \n* <expression> ':' \n* <expression> ]?
 }
 proto token binary-op { * }
 
@@ -152,11 +150,11 @@ rule tuple {
 rule object {
   '{' \n*
   [ <object-elem> * %% [ \n ] ] # https://github.com/hashicorp/hcl/pull/563
-  '}' 
+  '}'
 }
 
 rule object-elem {
-  [ <identifier> | <expression> ] [ "=" | ":" ] <expression>
+  [ <identifier> | <expression> ] [ "=" | ":" ] $<val>=<expression>
 }
 
 # TODO
@@ -183,7 +181,7 @@ token literal {
 }
 
 token string {
-  '"' <-["]>* '"'
+  '"' <( <-["]>* )> '"'
 }
 
 # TODO heredoc-template
@@ -197,7 +195,7 @@ token template-expr {
 }
 
 token quoted-template {
-  '"' <template> '"'
+  '"' <( <template> )> '"'
 }
 
 # TODO or template-directive: template-if, template-for
