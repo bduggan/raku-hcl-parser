@@ -1,7 +1,7 @@
 unit class HCL::Actions;
 
 method TOP($/) {
-  $/.make: $<config-file>.made;
+  $/.make: eager $<config-file>.made.Hash;
 }
 
 method config-file($/) {
@@ -9,7 +9,7 @@ method config-file($/) {
 }
 
 method body($/) {
-  $/.make: $<piece>.map: *.made
+  $/.make: %( $<piece>.map: *.made )
 }
 
 method piece($/) {
@@ -61,7 +61,7 @@ method tuple($/) {
 }
 
 method object($/) {
-  $/.make: $<object-elem>.map: *.made
+  $/.make: %( $<object-elem>.map: *.made )
 }
 
 method object-elem($/) {

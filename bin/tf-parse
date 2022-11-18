@@ -9,7 +9,7 @@ unit sub MAIN($file,
   Bool :$json,  #= dump a data structure created, as json
 );
 
-my $out = parse($file.IO.slurp, :$parse);
+my $out = parse-hcl($file.IO.slurp, :$parse);
 
 say to-json($out) if $json;
 say $out if $parse;

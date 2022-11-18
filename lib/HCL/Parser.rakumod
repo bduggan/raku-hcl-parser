@@ -2,7 +2,7 @@ unit module HCL::Parser;
 use HCL::Grammar;
 use HCL::Actions;
 
-sub parse(Str $string, Bool :$parse = False) is export {
+sub parse-hcl(Str $string, Bool :$parse = False) is export {
   my $actions = HCL::Actions.new;
   my $match = HCL::Grammar.new.parse($string, :$actions);
   fail $match unless $match;
