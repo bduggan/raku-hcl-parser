@@ -4,7 +4,7 @@ This is a parser for the HCL language, primarily used for configuration of Terra
 
 Currently it just includes a grammar and a little command line tool.
 
-Example usage:
+Example usage of the command line tool, `tf-parse`:
 
     # config.tf
     terraform {
@@ -19,7 +19,21 @@ Example usage:
     $ tf-parse config.tf
     config.tf: syntax ok
 
-`tf-parse` also has
+		# tf-parse config.tf --json
+		[
+			{
+				"terraform": {
+					"required_providers": {
+						"linode": {
+							"source": "linode/linode",
+							"version": "1.16.0"
+						}
+					}
+				}
+			}
+		]
+
+`tf-parse` has these options:
 
 * a `--dump` option to dump the parse tree.
 
