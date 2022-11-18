@@ -19,7 +19,11 @@ Example usage:
     $ tf-parse config.tf
     config.tf: syntax ok
 
-`tf-parse` also has a `--dump` option to dump the parse tree.
+`tf-parse` also has
+
+* a `--dump` option to dump the parse tree.
+
+* a `--json` option to dump the generated syntax tree as json.
 
 ## INSTALLATION
 
@@ -28,6 +32,8 @@ Example usage:
 2. `zef install https://github.com/bduggan/raku-hcl-parser.git`
 
 ## TODO
+
+A lot!
 
 - heredocs
 - for expressions
