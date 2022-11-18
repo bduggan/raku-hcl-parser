@@ -19,19 +19,21 @@ Example usage of the command line tool, `tf-parse`:
     $ tf-parse config.tf
     config.tf: syntax ok
 
-		# tf-parse config.tf --json
-		[
-			{
-				"terraform": {
-					"required_providers": {
-						"linode": {
-							"source": "linode/linode",
-							"version": "1.16.0"
-						}
-					}
-				}
-			}
-		]
+example 2
+
+    $ tf-parse config.tf --json
+    [
+      {
+        "terraform": {
+          "required_providers": {
+            "linode": {
+              "source": "linode/linode",
+              "version": "1.16.0"
+            }
+          }
+        }
+      }
+    ]
 
 `tf-parse` has these options:
 
