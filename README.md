@@ -37,9 +37,9 @@ example 2
 
 `tf-parse` has these options:
 
-* a `--dump` option to dump the parse tree.
+* a `--dump` -- dump the parse tree.
 
-* a `--json` option to dump the generated syntax tree as json.
+* a `--json` -- dump the syntax tree as json.
 
 ## INSTALLATION
 
