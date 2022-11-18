@@ -20,7 +20,7 @@ rule config-file {
 
 rule body {
   \s*
-  <piece> * %% \n
+  <piece> * %% \n+
 }
 
 rule piece {

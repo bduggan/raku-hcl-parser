@@ -1,6 +1,9 @@
 #!raku
 
 use Test;
+plan 3;
+
+
 use HCL::Parser;
 
 my $out = parse-hcl(q:to/HCL/);
@@ -15,6 +18,5 @@ terraform {
 HCL
 
 is $out, $(:terraform(${:required_providers(${:linode(${:source("linode/linode"), :version("1.16.0")})})}),), 'got it';
-
 is $out[0]<terraform>[0]<required_providers>[0]<linode><source>, 'linode/linode', 'nested structure';
 is $out[0]<terraform>[0]<required_providers>[0]<linode><version>, '1.16.0', 'nested structure';
