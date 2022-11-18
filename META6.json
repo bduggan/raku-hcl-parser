@@ -9,6 +9,7 @@
   "perl": "6.d",
   "provides": {
     "HCL::Grammar": "lib/HCL/Grammar.rakumod",
+    "HCL::Actions": "lib/HCL/Actions.rakumod",
     "HCL::Parser": "lib/HCL/Parser.rakumod"
   },
   "repo-type": "git",
