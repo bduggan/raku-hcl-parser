@@ -144,7 +144,7 @@ rule collection-value {
 }
 
 rule tuple {
-  "[" \n* <expression>* %% [ "," \n* ]  "]"
+  "[" \n* <expression>* %% [ \n* "," \n* ] \n* "]"
 }
 
 rule object {
