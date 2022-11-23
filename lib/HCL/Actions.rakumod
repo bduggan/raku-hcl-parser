@@ -9,7 +9,11 @@ method config-file($/) {
 }
 
 method body($/) {
-  $/.make: %( $<piece>.map: *.made )
+  if $<piece>[0].made ~~ Pair {
+    $/.make: %( $<piece>.map: *.made )
+  } else {
+    $/.make: @( $<piece>.map: *.made )
+  }
 }
 
 method piece($/) {
