@@ -1,7 +1,7 @@
 unit class HCL::Actions;
 
 method TOP($/) {
-  $/.make: eager $<config-file>.made.Hash;
+  $/.make: $<config-file>.made;
 }
 
 method config-file($/) {
