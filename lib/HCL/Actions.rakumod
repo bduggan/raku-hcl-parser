@@ -57,7 +57,7 @@ method collection-value($/) {
 }
 
 method tuple($/) {
-  $/.make: "TODO tuple $/";
+  $/.make: $<expression>.map: *.made
 }
 
 method object($/) {
